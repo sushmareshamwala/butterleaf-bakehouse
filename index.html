@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Butterleaf Bakehouse · eggless cakes, baked this morning</title>
+<meta name="description" content="Butterleaf Bakehouse, an eggless bakery in Bodakdev, Ahmedabad. Three trays out of the oven every day. Order cakes on WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --oven: #24140D;      /* inside the oven, hero and footer */
+    --cocoa: #33201A;     /* text */
+    --crumb: #7A5B4C;     /* soft text */
+    --pista: #EEF1E4;     /* page, pistachio milk */
+    --pista-deep: #D5DDC2;
+    --icing: #FFFDF8;     /* cards */
+    --raspberry: #B8325A; /* actions */
+    --butter: #F2C94C;    /* oven glow, the timer */
+    --display: "Young Serif", Georgia, serif;
+    --body: Figtree, system-ui, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--body); color: var(--cocoa); background: var(--pista); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--butter); outline-offset: 3px; border-radius: 6px; }
+  .wrap { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+  h1, h2, h3 { font-family: var(--display); font-weight: 400; letter-spacing: -.01em; }
+  .eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--crumb); }
+
+  /* ---------- nav ---------- */
+  nav { position: fixed; inset: 0 0 auto 0; z-index: 10; transition: background .3s ease, box-shadow .3s ease; }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+  .brand { font-family: var(--display); font-size: 22px; text-decoration: none; color: var(--icing); transition: color .3s ease; }
+  .brand span { color: var(--butter); transition: color .3s ease; }
+  nav .links { display: flex; align-items: center; gap: 28px; }
+  nav .links a { text-decoration: none; font-weight: 500; font-size: 15px; color: #EADFD3; transition: color .3s ease; }
+  nav .links a.order { color: var(--oven); background: var(--butter); padding: 10px 18px; border-radius: 999px; font-weight: 700; }
+  nav.solid { background: rgba(238,241,228,.92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 1px 0 var(--pista-deep); }
+  nav.solid .brand { color: var(--cocoa); }
+  nav.solid .brand span { color: var(--raspberry); }
+  nav.solid .links a { color: var(--crumb); }
+  nav.solid .links a.order { color: var(--icing); background: var(--raspberry); }
+
+  /* ---------- hero: the oven window ---------- */
+  .hero { position: relative; min-height: 100svh; display: flex; align-items: flex-end; overflow: hidden; background: var(--oven); color: var(--icing); }
+  .hero .media, .hero .shade { position: absolute; inset: 0; }
+  .hero .media img, .hero .media video { width: 100%; height: 100%; object-fit: cover; }
+  .hero .media img { animation: rise 18s ease-in-out infinite alternate; transform-origin: 60% 70%; }
+  .hero .media video { position: absolute; inset: 0; opacity: 0; transition: opacity 1.2s ease; }
+  .hero.has-video .media video { opacity: 1; }
+  @keyframes rise { from { transform: scale(1.02); } to { transform: scale(1.12); } }
+  .hero .shade { background:
+      linear-gradient(to top, rgba(36,20,13,.92) 0%, rgba(36,20,13,.55) 38%, rgba(36,20,13,.1) 70%, rgba(36,20,13,.45) 100%); }
+  .hero .wrap { position: relative; width: 100%; padding-bottom: 72px; }
+  .hero .eyebrow { color: #E8CBB0; }
+  .hero h1 { font-size: clamp(52px, 9vw, 120px); line-height: .98; margin-top: 18px; max-width: 11ch; }
+  .hero h1 em { font-style: normal; color: var(--butter); }
+  .hero p.lead { font-size: clamp(17px, 2vw, 21px); color: #EADFD3; margin-top: 22px; max-width: 34ch; line-height: 1.5; }
+  .hero .actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 34px; align-items: center; }
+
+  /* the signature: next tray out of the oven */
+  .timer { display: inline-flex; align-items: center; gap: 12px; margin-top: 30px; padding: 10px 18px 10px 14px; border-radius: 999px;
+           background: rgba(242,201,76,.12); border: 1px solid rgba(242,201,76,.45); font-family: var(--mono); font-size: 14px; line-height: 1.45; color: #FBE7AE; border-radius: 20px; }
+  .timer .glow { flex-shrink: 0; width: 10px; height: 10px; border-radius: 50%; background: var(--butter); box-shadow: 0 0 0 0 rgba(242,201,76,.7); animation: glow 2s ease-out infinite; }
+  @keyframes glow { to { box-shadow: 0 0 0 12px rgba(242,201,76,0); } }
+  .timer b { color: var(--butter); font-weight: 500; }
+
+  .btn { display: inline-flex; align-items: center; gap: 10px; padding: 16px 26px; border-radius: 999px; font-weight: 700; font-size: 16px; text-decoration: none; border: 0; cursor: pointer; font-family: var(--body); transition: transform .2s ease, box-shadow .2s ease; }
+  .btn:hover { transform: translateY(-2px); }
+  .btn-wa { background: #25D366; color: #0B3B1E; box-shadow: 0 10px 30px rgba(37,211,102,.3); }
+  .btn-wa svg { width: 22px; height: 22px; fill: currentColor; }
+  .btn-ghost { color: var(--icing); border: 1.5px solid rgba(255,253,248,.45); background: transparent; }
+  .btn-ghost:hover { border-color: var(--icing); }
+
+  /* ---------- sections ---------- */
+  .band { padding: 112px 0; }
+  .band-head { display: flex; justify-content: space-between; align-items: end; gap: 24px; flex-wrap: wrap; }
+  .band h2, .builder h2 { font-size: clamp(38px, 5.5vw, 64px); line-height: 1.02; margin-top: 12px; max-width: 14ch; }
+  .band-head p { color: var(--crumb); max-width: 36ch; line-height: 1.55; font-size: 17px; }
+
+  /* today's counter */
+  .counter { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 52px; }
+  .cake { background: var(--icing); border-radius: 22px; overflow: hidden; box-shadow: 0 1px 0 var(--pista-deep), 0 24px 48px -28px rgba(51,32,26,.35); display: flex; flex-direction: column; }
+  .cake .photo { aspect-ratio: 1; overflow: hidden; }
+  .cake .photo img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
+  .cake:hover .photo img { transform: scale(1.05); }
+  .cake .body { padding: 20px 20px 22px; display: flex; flex-direction: column; flex: 1; }
+  .cake h3 { font-size: 23px; line-height: 1.15; }
+  .cake p { color: var(--crumb); font-size: 15px; line-height: 1.5; margin-top: 8px; flex: 1; }
+  .tag { align-self: flex-start; margin-top: 18px; font-family: var(--mono); font-size: 13px; color: var(--cocoa); background: var(--pista); padding: 6px 10px; border-radius: 6px; border: 1px dashed #B9C2A2; }
+
+  /* from the kitchen: two short loops */
+  .kitchen { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 52px; }
+  .clip { margin: 0; }
+  .clip .frame { position: relative; aspect-ratio: 16 / 9; border-radius: 22px; overflow: hidden; background: var(--oven); }
+  .clip video, .clip img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .clip figcaption { display: flex; justify-content: space-between; gap: 16px; margin-top: 14px; font-size: 16px; }
+  .clip figcaption b { font-family: var(--display); font-weight: 400; font-size: 21px; }
+  .clip figcaption span { color: var(--crumb); text-align: right; }
+
+  /* three trays a day */
+  .trays { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-top: 52px; border-top: 1.5px solid var(--cocoa); }
+  .tray { padding: 28px 28px 8px 0; position: relative; }
+  .tray + .tray { padding-left: 28px; border-left: 1px solid var(--pista-deep); }
+  .tray time { font-family: var(--display); font-size: clamp(44px, 5vw, 60px); line-height: 1; display: block; }
+  .tray time small { font-family: var(--mono); font-size: 14px; margin-left: 6px; color: var(--crumb); }
+  .tray h3 { font-family: var(--body); font-weight: 700; font-size: 17px; margin-top: 18px; }
+  .tray p { color: var(--crumb); font-size: 15px; line-height: 1.55; margin-top: 6px; }
+  .tray .now { display: none; position: absolute; top: -13px; left: 0; font-family: var(--mono); font-size: 12px; background: var(--butter); color: var(--oven); padding: 4px 10px; border-radius: 999px; }
+  .tray + .tray .now { left: 28px; }
+  .tray.next .now { display: inline-block; }
+  .tray.next time { color: var(--raspberry); }
+
+  /* build your cake */
+  .builder { background: var(--oven); color: var(--icing); border-radius: 32px; padding: clamp(32px, 5vw, 64px); display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+  .builder .eyebrow { color: #E8CBB0; }
+  .builder h2 { color: var(--icing); }
+  section[id] { scroll-margin-top: 72px; }
+  .builder > div > p { color: #D9C6B6; margin-top: 18px; line-height: 1.6; font-size: 17px; max-width: 34ch; }
+  form { display: grid; gap: 22px; }
+  fieldset { border: 0; }
+  legend, label.field { font-family: var(--mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: #E8CBB0; margin-bottom: 10px; display: block; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chips input { position: absolute; opacity: 0; pointer-events: none; }
+  .chips label { padding: 10px 16px; border-radius: 999px; border: 1.5px solid rgba(255,253,248,.25); cursor: pointer; font-size: 15px; font-weight: 500; transition: all .15s ease; }
+  .chips input:checked + label { background: var(--butter); border-color: var(--butter); color: var(--oven); }
+  .chips input:focus-visible + label { outline: 3px solid var(--butter); outline-offset: 2px; }
+  input[type=text], input[type=date] { width: 100%; padding: 14px 16px; border-radius: 12px; border: 1.5px solid rgba(255,253,248,.25); background: rgba(255,253,248,.06); color: var(--icing); font: 500 16px var(--body); color-scheme: dark; }
+  input[type=text]::placeholder { color: #A8917F; }
+  .total { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; padding-top: 22px; border-top: 1px solid rgba(255,253,248,.15); }
+  .total output { font-family: var(--display); font-size: 40px; color: var(--butter); }
+  .total output small { font-family: var(--mono); font-size: 13px; color: #D9C6B6; margin-left: 8px; }
+
+  /* visit */
+  .visit { display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: start; }
+  .visit dl { display: grid; grid-template-columns: auto 1fr; gap: 14px 28px; margin-top: 8px; font-size: 17px; }
+  .visit dt { font-family: var(--mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--crumb); padding-top: 4px; }
+  .visit dd a { color: var(--raspberry); font-weight: 600; }
+
+  footer { background: var(--oven); color: #CDB9A8; padding: 40px 0; font-size: 14px; margin-top: 112px; }
+  footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  footer .credit { font-size: 12px; opacity: .75; }
+
+  /* reveal on scroll */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+
+  @media (max-width: 960px) {
+    .counter { grid-template-columns: repeat(2, 1fr); }
+    .builder, .visit { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) {
+    nav .links a:not(.order) { display: none; }
+    .band { padding: 80px 0; }
+    .counter { gap: 14px; }
+    .cake .body { padding: 14px 14px 16px; }
+    .cake h3 { font-size: 19px; }
+    .cake p { font-size: 14px; }
+    .trays { grid-template-columns: 1fr; }
+    .kitchen { grid-template-columns: 1fr; }
+    .clip figcaption { flex-direction: column; gap: 2px; }
+    .clip figcaption span { text-align: left; }
+    .tray, .tray + .tray { padding: 26px 0 18px; border-left: 0; border-bottom: 1px solid var(--pista-deep); }
+    .tray + .tray .now { left: 0; }
+    .hero .wrap { padding-bottom: 48px; }
+    /* phone: the oven fills the top, the words sit under it */
+    .hero .media { bottom: 42%; -webkit-mask-image: linear-gradient(to bottom, #000 70%, transparent); mask-image: linear-gradient(to bottom, #000 70%, transparent); }
+    .hero .shade { background: linear-gradient(to bottom, rgba(36,20,13,.5) 0%, rgba(36,20,13,0) 22%, rgba(36,20,13,0) 45%, var(--oven) 62%); }
+    .builder { border-radius: 24px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .hero .media img, .timer .glow { animation: none; }
+    .hero .media video, .clip video { display: none; }
+    .reveal { opacity: 1; transform: none; transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#top">Butterleaf<span>.</span></a>
+    <div class="links">
+      <a href="#counter">Today's cakes</a>
+      <a href="#trays">Oven times</a>
+      <a href="#visit">Visit</a>
+      <a class="order" href="#order">Order a cake</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="media" aria-hidden="true">
+    <img src="assets/hero-poster-video.jpg" alt="">
+    <video muted loop playsinline preload="auto"></video>
+  </div>
+  <div class="shade"></div>
+  <div class="wrap">
+    <div class="eyebrow">Eggless bakehouse · Bodakdev, Ahmedabad</div>
+    <h1>Baked this <em>morning.</em></h1>
+    <p class="lead">Every cake on our counter went into the oven today. All of them eggless, since 2016.</p>
+    <div class="timer" id="timer" aria-live="polite"><span class="glow"></span><span id="timer-text">Next tray out of the oven soon</span></div>
+    <div class="actions">
+      <a class="btn btn-wa" href="#order">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2m0 1.67c4.56 0 8.24 3.69 8.24 8.24 0 4.56-3.68 8.24-8.24 8.24-1.56 0-3.07-.43-4.38-1.26l-.31-.18-3.12.82.83-3.04-.2-.32a8.17 8.17 0 0 1-1.26-4.38c0-4.55 3.69-8.24 8.24-8.24m-3.6 4.42c-.18 0-.47.07-.72.34-.25.27-.95.93-.95 2.26 0 1.34.97 2.62 1.11 2.8.13.19 1.88 2.99 4.64 4.07 2.29.9 2.76.72 3.26.68.5-.05 1.6-.65 1.83-1.29.22-.63.22-1.17.16-1.29-.07-.11-.25-.18-.52-.31-.27-.14-1.6-.79-1.85-.88-.25-.09-.43-.14-.61.13-.18.27-.7.88-.86 1.06-.16.18-.32.2-.59.07-.27-.14-1.14-.42-2.18-1.34-.8-.72-1.35-1.6-1.5-1.87-.16-.27-.02-.42.12-.55.12-.12.27-.32.4-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.13-.61-1.47-.84-2.01-.22-.53-.44-.46-.61-.47h-.52z"/></svg>
+        Order a cake
+      </a>
+      <a class="btn btn-ghost" href="#counter">See today's cakes</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="band" id="counter">
+    <div class="wrap">
+      <div class="band-head reveal">
+        <div>
+          <div class="eyebrow">On the counter today</div>
+          <h2>Four cakes we bake every day.</h2>
+        </div>
+        <p>Prices are for half a kilo. Ask for 1 kg or 2 kg in the order form below.</p>
+      </div>
+      <div class="counter">
+        <article class="cake reveal">
+          <div class="photo"><img src="assets/cake-chocolate.jpg" alt="Chocolate truffle cake with glossy ganache, one slice cut" loading="lazy" width="800" height="800"></div>
+          <div class="body">
+            <h3>Chocolate Truffle</h3>
+            <p>Dark Belgian chocolate ganache poured while it is still warm.</p>
+            <span class="tag">₹650 · ½ kg</span>
+          </div>
+        </article>
+        <article class="cake reveal">
+          <div class="photo"><img src="assets/cake-pistachio.jpg" alt="Pistachio rose cake with green frosting and rose petals" loading="lazy" width="800" height="800"></div>
+          <div class="body">
+            <h3>Pista Rose</h3>
+            <p>Pistachio sponge, rose cream and dried petals from Kannauj.</p>
+            <span class="tag">₹750 · ½ kg</span>
+          </div>
+        </article>
+        <article class="cake reveal">
+          <div class="photo"><img src="assets/cake-mango.jpg" alt="Mango cheesecake with mango glaze and mango cubes" loading="lazy" width="800" height="800"></div>
+          <div class="body">
+            <h3>Alphonso Cheesecake</h3>
+            <p>Baked cheesecake with a layer of Alphonso mango on top.</p>
+            <span class="tag">₹800 · ½ kg</span>
+          </div>
+        </article>
+        <article class="cake reveal">
+          <div class="photo"><img src="assets/cake-biscoff.jpg" alt="Caramel Biscoff cake with caramel drip and biscuits" loading="lazy" width="800" height="800"></div>
+          <div class="body">
+            <h3>Biscoff Caramel</h3>
+            <p>Brown sugar sponge with Biscoff cream and salted caramel.</p>
+            <span class="tag">₹720 · ½ kg</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="kitchen" style="padding-top:0">
+    <div class="wrap">
+      <div class="band-head reveal">
+        <div>
+          <div class="eyebrow">From the kitchen</div>
+          <h2>The last step is always by hand.</h2>
+        </div>
+        <p>No machine glazes or pipes our cakes. This is what happens in the hour before they reach the counter.</p>
+      </div>
+      <div class="kitchen">
+        <figure class="clip reveal">
+          <div class="frame">
+            <img src="assets/kitchen-ganache.jpg" alt="Warm chocolate ganache poured over a layered chocolate cake" loading="lazy">
+            <video muted loop playsinline preload="none" data-name="kitchen-ganache" aria-hidden="true"></video>
+          </div>
+          <figcaption><b>Ganache, poured warm</b><span>Chocolate Truffle · 11 am tray</span></figcaption>
+        </figure>
+        <figure class="clip reveal">
+          <div class="frame">
+            <img src="assets/kitchen-piping.jpg" alt="Pistachio cream piped in rosettes on a white cake, rose petals beside it" loading="lazy">
+            <video muted loop playsinline preload="none" data-name="kitchen-piping" aria-hidden="true"></video>
+          </div>
+          <figcaption><b>Pista cream, piped one by one</b><span>Pista Rose · 11 am tray</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="trays" style="padding-top:0">
+    <div class="wrap">
+      <div class="band-head reveal">
+        <div>
+          <div class="eyebrow">Oven times</div>
+          <h2>Three trays a day.</h2>
+        </div>
+        <p>Come at these times and it is still warm. We do not bake again after 4 pm.</p>
+      </div>
+      <div class="trays reveal">
+        <div class="tray" data-hour="7">
+          <span class="now">Next out</span>
+          <time>7:00<small>am</small></time>
+          <h3>Breads and buns</h3>
+          <p>Pav, milk bread, garlic loaf and jeera buns.</p>
+        </div>
+        <div class="tray" data-hour="11">
+          <span class="now">Next out</span>
+          <time>11:00<small>am</small></time>
+          <h3>Cakes and pastries</h3>
+          <p>The four cakes above, plus slices and jar cakes.</p>
+        </div>
+        <div class="tray" data-hour="16">
+          <span class="now">Next out</span>
+          <time>4:00<small>pm</small></time>
+          <h3>Cookies and tea cakes</h3>
+          <p>Nankhatai, butter cookies and the evening banana loaf.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="order">
+    <div class="wrap">
+      <div class="builder reveal">
+        <div>
+          <div class="eyebrow">Order a cake</div>
+          <h2>Pick it here, we confirm on WhatsApp.</h2>
+          <p>Choose the cake, the size and the words on top. Your WhatsApp opens with the message ready to send. Order by 6 pm for the next day.</p>
+        </div>
+        <form id="cake-form">
+          <fieldset>
+            <legend>Cake</legend>
+            <div class="chips">
+              <input type="radio" name="cake" id="c1" value="Chocolate Truffle" data-price="650" checked><label for="c1">Chocolate Truffle</label>
+              <input type="radio" name="cake" id="c2" value="Pista Rose" data-price="750"><label for="c2">Pista Rose</label>
+              <input type="radio" name="cake" id="c3" value="Alphonso Cheesecake" data-price="800"><label for="c3">Alphonso Cheesecake</label>
+              <input type="radio" name="cake" id="c4" value="Biscoff Caramel" data-price="720"><label for="c4">Biscoff Caramel</label>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>Size</legend>
+            <div class="chips">
+              <input type="radio" name="size" id="s1" value="½ kg" data-x="1" checked><label for="s1">½ kg · serves 4</label>
+              <input type="radio" name="size" id="s2" value="1 kg" data-x="2"><label for="s2">1 kg · serves 8</label>
+              <input type="radio" name="size" id="s3" value="2 kg" data-x="4"><label for="s3">2 kg · serves 16</label>
+            </div>
+          </fieldset>
+          <div>
+            <label class="field" for="msg">Words on the cake</label>
+            <input type="text" id="msg" maxlength="30" placeholder="Happy birthday Riya">
+          </div>
+          <div>
+            <label class="field" for="day">Pick-up day</label>
+            <input type="date" id="day">
+          </div>
+          <div class="total">
+            <output id="price" for="cake-form">₹650<small>pay at pick-up</small></output>
+            <button class="btn btn-wa" type="submit">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2m0 1.67c4.56 0 8.24 3.69 8.24 8.24 0 4.56-3.68 8.24-8.24 8.24-1.56 0-3.07-.43-4.38-1.26l-.31-.18-3.12.82.83-3.04-.2-.32a8.17 8.17 0 0 1-1.26-4.38c0-4.55 3.69-8.24 8.24-8.24m-3.6 4.42c-.18 0-.47.07-.72.34-.25.27-.95.93-.95 2.26 0 1.34.97 2.62 1.11 2.8.13.19 1.88 2.99 4.64 4.07 2.29.9 2.76.72 3.26.68.5-.05 1.6-.65 1.83-1.29.22-.63.22-1.17.16-1.29-.07-.11-.25-.18-.52-.31-.27-.14-1.6-.79-1.85-.88-.25-.09-.43-.14-.61.13-.18.27-.7.88-.86 1.06-.16.18-.32.2-.59.07-.27-.14-1.14-.42-2.18-1.34-.8-.72-1.35-1.6-1.5-1.87-.16-.27-.02-.42.12-.55.12-.12.27-.32.4-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.13-.61-1.47-.84-2.01-.22-.53-.44-.46-.61-.47h-.52z"/></svg>
+              Send order on WhatsApp
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="visit">
+    <div class="wrap visit reveal">
+      <div>
+        <div class="eyebrow">Visit</div>
+        <h2>Small shop, big oven.</h2>
+      </div>
+      <dl>
+        <dt>Where</dt><dd>Shop 4, Sindhu Bhavan Road, Bodakdev, Ahmedabad</dd>
+        <dt>Open</dt><dd>8 am to 10 pm, every day</dd>
+        <dt>Call</dt><dd><a href="tel:+919999999999">+91 99999 99999</a></dd>
+        <dt>Map</dt><dd><a href="https://maps.google.com/?q=Sindhu+Bhavan+Road+Bodakdev+Ahmedabad" target="_blank" rel="noopener">Open in Google Maps</a></dd>
+      </dl>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Butterleaf Bakehouse · eggless since 2016 · a demo shop</span>
+    <span class="credit">Videos made with Google Flow (Veo, AI). Cake photos made with FLUX (AI).</span>
+  </div>
+</footer>
+
+<script>
+// WhatsApp number of the shop (a placeholder in this demo)
+const WA = '919999999999';
+
+// hero video: plays only when the file exists, the photo stays behind it until then
+const hero = document.querySelector('.hero');
+const video = hero.querySelector('video');
+if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  video.src = video.canPlayType('video/webm; codecs="vp9"') ? 'assets/hero.webm' : 'assets/hero.mp4';
+  video.addEventListener('playing', () => hero.classList.add('has-video'));
+  video.addEventListener('error', () => video.remove());
+  video.play().catch(() => {});
+}
+
+// nav turns solid after the hero
+const nav = document.querySelector('nav');
+const onScroll = () => nav.classList.toggle('solid', scrollY > innerHeight * .8);
+addEventListener('scroll', onScroll, { passive: true });
+onScroll();
+
+// the oven timer: next tray at 7, 11 or 16 o'clock
+const trays = [...document.querySelectorAll('.tray')];
+function tick() {
+  const now = new Date();
+  const mins = now.getHours() * 60 + now.getMinutes();
+  const hours = trays.map(t => +t.dataset.hour);
+  let i = hours.findIndex(h => h * 60 > mins);
+  let left, text;
+  if (i === -1) { i = 0; text = 'Last tray is out. Next one: <b>tomorrow, 7 am</b>'; }
+  else {
+    left = hours[i] * 60 - mins;
+    const h = Math.floor(left / 60), m = left % 60;
+    const what = trays[i].querySelector('h3').textContent.toLowerCase();
+    text = `Next tray out in <b>${h ? h + ' h ' : ''}${m} min</b> · ${what}`;
+  }
+  document.getElementById('timer-text').innerHTML = text;
+  trays.forEach((t, k) => t.classList.toggle('next', k === i));
+}
+tick(); setInterval(tick, 30000);
+
+// order form: live price + WhatsApp message
+const form = document.getElementById('cake-form');
+const day = document.getElementById('day');
+const tomorrow = new Date(Date.now() + 864e5);
+day.min = day.value = tomorrow.toISOString().slice(0, 10);
+const pick = name => form.querySelector(`input[name=${name}]:checked`);
+const price = () => +pick('cake').dataset.price * +pick('size').dataset.x;
+const showPrice = () => document.getElementById('price').innerHTML = `₹${price().toLocaleString('en-IN')}<small>pay at pick-up</small>`;
+form.addEventListener('change', showPrice);
+form.addEventListener('submit', e => {
+  e.preventDefault();
+  const words = document.getElementById('msg').value.trim();
+  const when = new Date(day.value).toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'short' });
+  const text = `Hi Butterleaf, I want to order:\n• ${pick('cake').value}, ${pick('size').value}\n• On top: ${words || '(no words)'}\n• Pick-up: ${when}\n• Price: ₹${price().toLocaleString('en-IN')}`;
+  window.open(`https://wa.me/${WA}?text=${encodeURIComponent(text)}`, '_blank', 'noopener');
+});
+
+// kitchen clips: load and play only while on screen, pause when scrolled away
+if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const webm = document.createElement('video').canPlayType('video/webm; codecs="vp9"');
+  const clipIO = new IntersectionObserver(es => es.forEach(e => {
+    const v = e.target;
+    if (e.isIntersecting) {
+      if (!v.src) v.src = `assets/${v.dataset.name}.${webm ? 'webm' : 'mp4'}`;
+      v.play().catch(() => {});
+    } else v.pause();
+  }), { threshold: .25 });
+  document.querySelectorAll('.clip video').forEach(v => clipIO.observe(v));
+}
+
+// gentle reveal as sections come into view
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .15 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
